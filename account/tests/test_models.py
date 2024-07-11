@@ -9,14 +9,12 @@ class CustomUserTestCase(TestCase):
             password='123',
             cpf_cnpj='333.333.333-33'
         )
-        self.user_with_cpf.save()
 
         self.user_with_cnpj = CustomUser.objects.create_user(
             email='usercnpj@gmail.com',
             password='123',
             cpf_cnpj='22.222.222/2222-22'
         )
-        self.user_with_cnpj.save()
 
     def test_check_user_with_cpf(self):
         user_cpf = self.user_with_cpf.cpf_cnpj
