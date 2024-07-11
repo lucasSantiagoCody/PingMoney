@@ -36,5 +36,6 @@ class CustomUserTestCase(TestCase):
     
     def test_check_password_user_with_cpf(self):
         self.assertTrue(self.user_with_cpf.check_password('123'))
+        
     def test_check_password_user_with_cnpj(self):
         self.assertTrue(self.user_with_cnpj.check_password('123'))

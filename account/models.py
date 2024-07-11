@@ -1,6 +1,33 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from decimal import Decimal
+
+
+class CustomUserManager(BaseUserManager):
+
+    def create_user(self, email, password=None, **extra_fields):
+
+        if not email:
+            raise ValueError('The email field must bet set')
+
+        normalized_email = self.normalize_email(email)
+        user = self.model(email=normalized_email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+
+        return user
+    
+    def create_superuser(self, email, password=None, **extra_fields):
+
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if not extra_fields.get('is_staff'):
+            raise ValueError('The staff field must be True')
+        if not extra_fields.get('is_superuser'):
+            raise ValueError('The superuser field must be True')
+        
+        self.create_user(email, password, **extra_fields)
 
 
 
@@ -19,6 +46,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username',]
 
+    objects = CustomUserManager()
 
     def save(self, *args, **kwargs):
         self.cpf_cnpj = self.cpf_cnpj.replace('.', '').replace('-', '').replace('/', '')
