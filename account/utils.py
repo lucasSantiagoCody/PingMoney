@@ -20,3 +20,10 @@ def full_name_validator(full_name):
     if full_name.strip() == "" and len(full_name) < 14:
         return False
     return True
+
+def type_user_validator(type_user):
+    types_user_allowed = ['commun', 'storekeeper']
+
+    if type_user and type_user in types_user_allowed:
+        return True
+    return False
