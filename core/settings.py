@@ -75,6 +75,9 @@ DATABASES = {
 
 AUTH_USER_MODEL = 'account.CustomUser'
 
+# Django Role permssinos
+ROLEPERMISSIONS_MODULE = 'core.roles'
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
