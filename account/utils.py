@@ -17,9 +17,14 @@ def email_validator(email):
     return False
 
 def full_name_validator(full_name):
-    if full_name.strip() == "" and len(full_name) < 14:
-        return False
-    return True
+    if full_name.strip() != "" and len(full_name) >= 14:
+        return True
+    return False
+
+def password_validator(pswd):
+    if pswd and len(pswd) >= 6:
+        return True
+    return False
 
 def type_user_validator(type_user):
     types_user_allowed = ['commun', 'storekeeper']
