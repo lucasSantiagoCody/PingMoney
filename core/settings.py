@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # My apps
-    'account',
+    'user',
     # Third apps
     'rolepermissions',
 ]
@@ -73,7 +73,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = 'account.CustomUser'
+AUTH_USER_MODEL = 'user.CustomUser'
 
 # Django Role permssinos
 ROLEPERMISSIONS_MODULE = 'core.roles'

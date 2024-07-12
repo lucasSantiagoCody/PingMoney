@@ -1,6 +1,6 @@
 from .utils import register_user_request_validator
-from rolepermissions.roles import assign_role
 from .schemas import TypeUserSchema
+from rolepermissions.roles import assign_role
 from ninja.errors import HttpError
 from ninja.router import Router
 from .models import CustomUser
@@ -8,7 +8,7 @@ from .models import CustomUser
 router = Router()
 
 @router.post('register/', response={200: dict})
-def register_user(request, data: TypeUserSchema):
+def register_user(request, data:TypeUserSchema):
     register_user_request_validator(data)
 
     try:
