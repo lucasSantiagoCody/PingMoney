@@ -7,3 +7,9 @@ class CommunPerson(AbstractUserRole):
         'can_receive_transfer': True
     }
 
+
+class StorekeeperPerson(AbstractUserRole):
+    available_permissions = {
+        'can_make_transfer': False,
+        'can_receive_transfer': True
+    }
