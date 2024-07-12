@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # My apps
     'user',
+    'payment',
     # Third apps
     'rolepermissions',
 ]
