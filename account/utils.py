@@ -15,3 +15,8 @@ def email_validator(email):
         if not check_email:
             return True
     return False
+
+def full_name_validator(full_name):
+    if full_name.strip() == "" and len(full_name) < 14:
+        return False
+    return True
