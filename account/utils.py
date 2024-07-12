@@ -32,10 +32,12 @@ def register_user_request_validator(request_data):
 
     return True
     
-
 def cpf_cnpj_validator(cpf_cnpj_value):
     if cpfcnpj.validate(cpf_cnpj_value):
-        return True
+        formatted_cpf_cnpj = cpf_cnpj_value.replace('.', '').replace('-', '').replace('/', '')
+        check_cpf_cnpj_exists = CustomUser.objects.filter(cpf_cnpj=formatted_cpf_cnpj)
+        if not check_cpf_cnpj_exists:
+            return True
     return False
 
 def email_validator(email):
