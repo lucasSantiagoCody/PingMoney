@@ -37,7 +37,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=100, unique=True, null=False)
     full_name = models.CharField(max_length=50, null=False)
     cpf_cnpj = models.CharField(max_length=14, unique=True, null=False)
-    amount = models.DecimalField(max_digits=9, decimal_places=2, default=Decimal('0.00'))
+    balance = models.DecimalField(max_digits=9, decimal_places=2, default=Decimal('0.00'))
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
