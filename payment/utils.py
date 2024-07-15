@@ -1,29 +1,36 @@
-from core.utils import error_message_handler
 from rolepermissions.checkers import has_role
+from core.utils import error_message_handler
 from user.models import CustomUser
 from ninja.errors import HttpError
 from core.roles import Commun
 from decimal import Decimal
 
 def transfer_request_validator(request_data):
+
+    # About data integrity
+    check_amount = amount_validator(request_data.value)
     check_payer_payee = payer_payee_validator(
             request_data.payer, 
             request_data.payee
             )
+    
+    # About payer validations
     payer_has_permission = check_payer_has_permission(request_data.payer)
     payer_equal_to_payee = check_payer_equal_to_payee(request_data.payer, request_data.payee)
-    check_amount = amount_validator(request_data.value)
     payer_has_balance_to_transfer = check_payer_has_balance_to_transfer(
         request_data.payer,
         request_data.value
     )
+   
     messages_error = []
 
+    # check data integrity
     if not check_payer_payee:
         messages_error.append("Payer or Payee isn't registered")
     if not check_amount:
         messages_error.append('Amount must be Decimal')
     
+    # check payer validations
     if payer_has_permission == False:
         messages_error.append("Storekeepers can't make transfer")
     if payer_equal_to_payee:
@@ -31,10 +38,12 @@ def transfer_request_validator(request_data):
     if not payer_has_balance_to_transfer:
         messages_error.append('The amount to be transferred exceeds your balance')
 
+    # about messages error handling
     single_message_error = error_message_handler(messages_error)
 
     if single_message_error:
         raise HttpError(status_code=400, message=single_message_error)
+
     return True
 
 def payer_payee_validator(payer:int, payee:int):
