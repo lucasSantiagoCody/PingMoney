@@ -31,7 +31,7 @@ def transfer_request_validator(request_data):
 
 def payer_payee_validator(payer:int, payee:int):
     check_payer = CustomUser.objects.filter(id=int(payer))
-    check_payee = CustomUser.objects.filter(id=int(payer))
+    check_payee = CustomUser.objects.filter(id=int(payee))
 
     if check_payer and check_payee:
         return True
