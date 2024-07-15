@@ -13,7 +13,10 @@ def transfer_request_validator(request_data):
     payer_has_permission = check_payer_has_permission(request_data.payer)
     payer_equal_to_payee = check_payer_equal_to_payee(request_data.payer, request_data.payee)
     check_amount = amount_validator(request_data.value)
-    
+    payer_has_balance_to_transfer = check_payer_has_balance_to_transfer(
+        request_data.payer,
+        request_data.value
+    )
     messages_error = []
 
     if not check_payer_payee:
@@ -25,6 +28,8 @@ def transfer_request_validator(request_data):
         messages_error.append("Storekeepers can't make transfer")
     if payer_equal_to_payee:
         messages_error.append("Can't transfer to yourself, make a deposit")
+    if not payer_has_balance_to_transfer:
+        messages_error.append('The amount to be transferred exceeds your balance')
 
     single_message_error = error_message_handler(messages_error)
 
