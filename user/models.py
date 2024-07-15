@@ -66,5 +66,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
             formated_cpf_cnpj = f"{self.cpf_cnpj[0:2]}.{self.cpf_cnpj[2:5]}.{self.cpf_cnpj[5:8]}/{self.cpf_cnpj[8:12]}-{self.cpf_cnpj[12:14]}"
             return formated_cpf_cnpj
             
+    def pay(self, amount):
+        self.balance -= amount
+    
+    def receive(self, amount):
+        self.balance += amount
+        
+    
+
+
     def __str__(self):
         return self.full_name
