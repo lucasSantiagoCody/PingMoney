@@ -11,6 +11,7 @@ def transfer_request_validator(request_data):
             request_data.payee
             )
     payer_has_permission = check_payer_has_permission(request_data.payer)
+    payer_equal_to_payee = check_payer_equal_to_payee(request_data.payer, request_data.payee)
     check_amount = amount_validator(request_data.value)
     
     messages_error = []
@@ -19,9 +20,11 @@ def transfer_request_validator(request_data):
         messages_error.append("Payer or Payee isn't registered")
     if not check_amount:
         messages_error.append('Amount must be Decimal')
-
+    
     if payer_has_permission == False:
         messages_error.append("Storekeepers can't make transfer")
+    if payer_equal_to_payee:
+        messages_error.append("Can't transfer to yourself, make a deposit")
 
     single_message_error = error_message_handler(messages_error)
 
