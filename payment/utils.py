@@ -66,3 +66,14 @@ def check_payer_equal_to_payee(payer, payee):
     if payer == payee:
         return True
     return None
+
+def check_payer_has_balance_to_transfer(payer_id, amount_to_transfer):
+
+    try:
+        payer_balance = CustomUser.objects.get(id=payer_id).balance
+        if amount_to_transfer < payer_balance:
+            return True
+        else:
+            return False
+    except:
+        raise HttpError(status_code=400, message="Payer isn't regitered")
