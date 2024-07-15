@@ -58,3 +58,8 @@ def check_payer_has_permission(payer_id):
     has_permission = has_role(payer, Commun)
     if not has_permission:
        return False
+
+def check_payer_equal_to_payee(payer, payee):
+    if payer == payee:
+        return True
+    return None
