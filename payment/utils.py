@@ -8,7 +8,7 @@ from decimal import Decimal
 def transfer_request_validator(request_data):
 
     # About data integrity
-    check_amount = amount_validator(request_data.value)
+    check_amount = amount_validator(request_data.amount)
     check_payer_payee = payer_payee_validator(
             request_data.payer, 
             request_data.payee
@@ -19,7 +19,7 @@ def transfer_request_validator(request_data):
     payer_equal_to_payee = check_payer_equal_to_payee(request_data.payer, request_data.payee)
     payer_has_balance_to_transfer = check_payer_has_balance_to_transfer(
         request_data.payer,
-        request_data.value
+        request_data.amount
     )
    
     messages_error = []
