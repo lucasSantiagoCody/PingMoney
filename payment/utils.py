@@ -46,6 +46,25 @@ def transfer_request_validator(request_data):
 
     return True
 
+
+def deposit_request_validator(request_data_schema):
+    # check data integrity
+    check_depositor = depositor_validator(request_data_schema.depositor)
+    check_amount = amount_validator(request_data_schema.amount)
+
+    messages_error = []
+
+    # deposit validations
+    if not check_depositor:
+        messages_error.append("Depositor isn't registered")
+    if not check_amount:
+        messages_error.append('Invalid amount')
+
+    # handling messages error
+    single_msg = error_message_handler(messages_error)
+    return HttpError(status_code=400, message=single_msg)
+
+
 def payer_payee_validator(payer:int, payee:int):
     check_payer = CustomUser.objects.filter(id=int(payer))
     check_payee = CustomUser.objects.filter(id=int(payee))
