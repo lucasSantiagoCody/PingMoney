@@ -18,7 +18,7 @@ def transfer(request, request_data:TransferSchema):
 
     payer = CustomUser.objects.get(id=request_data.payer)
     payee = CustomUser.objects.get(id=request_data.payee)
-    amount_to_transfer = request_data.value
+    amount_to_transfer = request_data.amount
 
     authorizer_response = (requests.get(url=AUTHORIZER_ENDPOINT)).json()
 
@@ -47,7 +47,7 @@ def transfer(request, request_data:TransferSchema):
             transaction = Transaction(
                 payer=payer,
                 payee=payee,
-                amount=request_data.value,
+                amount=request_data.amount,
                 transaction_type='t'
             )
             transaction.save()
