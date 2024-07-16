@@ -91,3 +91,10 @@ def check_payer_has_balance_to_transfer(payer_id, amount_to_transfer):
             return False
     except:
         raise HttpError(status_code=400, message="Payer isn't regitered")
+
+def depositor_validator(depositor_id):
+    try:
+        depositor = CustomUser.objects.get(id=depositor_id)
+        return True
+    except:
+        return None
