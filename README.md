@@ -60,8 +60,10 @@ python3 manage.py runserver
 
 ### ⚠️ Create .env file end follow all steps on .env-example file
 
-
-
+## Using Docker
+```
+    docker compose up
+```
 ## Features
 ### # Use  postam to test this api rest
 ### App user
@@ -72,7 +74,6 @@ python3 manage.py runserver
 ```
 ##### body:
 ```
-
 {
     "user":{
         "full_name": "your_full_name",
