@@ -1,0 +1,9 @@
+venv
+.env
+migrations
+__pycache__
+db.sqlite3
+.gitignore
+README.md
+.env-example
+
