@@ -1,6 +1,6 @@
 from pathlib import Path
 from decouple import config
-
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,7 +14,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [host for host in config('ALLOWED_HOSTS').split(',')]
+ALLOWED_HOSTS = [host for host in os.getenv('ALLOWED_HOSTS', config('ALLOWED_HOSTS')).split(',')]
 
 
 # Application definition
